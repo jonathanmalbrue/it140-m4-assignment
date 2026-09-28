@@ -8,22 +8,62 @@
 # Your finished pseudocode should address every requirement in the
 # current Module Four Assignment Guidelines and Rubric.
 
-START hilow_game
+# Establish a valid guessing range.
+# Ask the user for the lower and upper bounds.
+OUTPUT "Enter the lower bound:"
+INPUT lowerBound
 
-    # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+OUTPUT "Enter the upper bound:"
+INPUT upperBound
 
-    # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+# Make sure the lower bound is less than the upper bound.
+WHILE lowerBound >= upperBound
+    OUTPUT "Invalid input. The lower bound must be less than the upper bound."
 
-    # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+    OUTPUT "Enter the lower bound:"
+    INPUT lowerBound
 
-END hilow_game
+    OUTPUT "Enter the upper bound:"
+    INPUT upperBound
+END WHILE
 
-# === References ===
-# TODO: Add references for sources you used, or delete this line if unused.
+# Establish the number the player is trying to guess.
+# Generate a random number between the lower and upper bounds.
+SET randomNumber = RANDOM NUMBER BETWEEN lowerBound AND upperBound
+
+# Play the game.
+# Ask the user for a guessing number and make sure it is within the bounds.
+OUTPUT "Guess a number between " + lowerBound + " and " + upperBound + ":"
+INPUT guess
+
+WHILE guess < lowerBound OR guess > upperBound
+    OUTPUT "Invalid guess. Please enter a number between " + lowerBound + " and " + upperBound + "."
+    INPUT guess
+END WHILE
+
+# Continue playing the game until the user guesses the correct number.
+WHILE guess != randomNumber
+
+    # Compare the guess to the random number and give feedback to the user.
+    IF guess < randomNumber
+        OUTPUT "Your guess is too low."
+    ELSE
+        OUTPUT "Your guess is too high."
+    END IF
+
+    # Ask for another guess from the user when the game continues.
+    OUTPUT "Guess again:"
+    INPUT guess
+
+    # Make sure the new guess is within the bounds.
+    WHILE guess < lowerBound OR guess > upperBound
+        OUTPUT "Invalid guess. Please enter a number between " + lowerBound + " and " + upperBound + "."
+        INPUT guess
+    END WHILE
+
+END WHILE
+
+# Alert the user when they guessed the correct number.
+OUTPUT "Congratulations! You guessed the correct number."
+=== References ===
+zyBooks. Introduction to Scripting: Chapter 4.
